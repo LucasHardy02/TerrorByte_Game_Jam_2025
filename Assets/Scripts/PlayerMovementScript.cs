@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public float coyTimeDur = 0.2f;
     private float coyTimeCount;
     private bool hasJumped = false;
+    public int movementSpeed;
 
 
     private void Start()
@@ -74,22 +75,22 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            movement += forward; ;
+            movement += forward * movementSpeed; 
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            movement -= right;
+            movement -= right * movementSpeed;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            movement -= forward;
+            movement -= forward * movementSpeed;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            movement += right;
+            movement += right * movementSpeed;
         }
 
         rb.transform.position += movement * 5 * Time.deltaTime;
