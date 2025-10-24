@@ -5,8 +5,8 @@ public class FlingScript : MonoBehaviour
     private bool flingState = false;
     private bool isGrounded;
     private bool isFlingable;
-    private float flingForceForward = 900;
-    private float flingForceUp = 200;
+    public float flingForceForward = 9000;
+    public float flingForceUp = 2000;
     public GameObject failFling;
     public GameObject Player;
     private Rigidbody rb;
