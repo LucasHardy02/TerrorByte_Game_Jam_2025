@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Bedrock
+  - Key
+  - Door
   layers:
   - Default
   - TransparentFX
