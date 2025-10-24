@@ -5,15 +5,16 @@ public class FlingScript : MonoBehaviour
     private bool flingState = false;
     private bool isGrounded;
     private bool isFlingable;
-    private float flingForceForward = 700;
+    private float flingForceForward = 900;
     private float flingForceUp = 200;
     public GameObject failFling;
-
+    public GameObject Player;
     private Rigidbody rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
 
         rb = GetComponent<Rigidbody>();
         failFling.SetActive(false);
@@ -26,7 +27,8 @@ public class FlingScript : MonoBehaviour
 
         if (isFlingable == true && isGrounded == true && Input.GetKeyDown(KeyCode.LeftShift))
         {
-            rb.AddForce(Vector3.forward * flingForceForward);
+            flingState = true;
+            rb.AddForce(Player.transform.forward * flingForceForward);
             rb.AddForce(Vector3.up * flingForceUp);
 
         }
