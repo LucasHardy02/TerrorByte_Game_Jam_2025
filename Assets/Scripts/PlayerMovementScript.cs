@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         //Fling
         if (isGrounded == false)
         {
-            rb.mass = rb.mass + Time.deltaTime;
+          
             movement = Vector3.one;
         }
 
