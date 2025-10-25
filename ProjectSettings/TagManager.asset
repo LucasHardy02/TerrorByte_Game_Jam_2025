@@ -10,6 +10,8 @@ TagManager:
   - Door
   - Water
   - Checkpoint
+  - Ladder
+  - Button
   layers:
   - Default
   - TransparentFX

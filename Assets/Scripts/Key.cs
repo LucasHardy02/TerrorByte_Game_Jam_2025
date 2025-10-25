@@ -5,7 +5,7 @@ public class Key : MonoBehaviour
     public GameObject door;
     public Animator doorAnim;
     static bool hasKey = false;
-
+    public SpriteRenderer keySprite;
 
 
     private void Start()
@@ -28,5 +28,16 @@ public class Key : MonoBehaviour
             doorAnim.enabled = true;
         }
     }
-    
+
+    private void Update()
+    {
+        if (hasKey == false)
+        {
+            keySprite.color = Color.black;
+        }
+        else
+        {
+            keySprite.color = Color.yellow;
+        }
+    }
 }
