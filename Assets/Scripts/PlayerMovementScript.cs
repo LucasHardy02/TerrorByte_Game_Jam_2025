@@ -11,16 +11,19 @@ public class PlayerMovement : MonoBehaviour
 
     private bool flingState = false;
     private bool isFlingable = true;
-    public float flingForceForward = 9000;
+    public float flingForceForward = 3000;
     public float flingForceUp = 2000;
     public GameObject failFling;
     public GameObject Player;
     private Rigidbody rb;
+    private bool isCharging;
+    private float chargeTime;
 
     public float coyTimeDur = 0.2f;
     private float coyTimeCount;
     private bool hasJumped = false;
     public int movementSpeed;
+
 
 
     private void Start()
@@ -33,16 +36,45 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    
+
     void Update()
     {
         //Fling
+        if (isGrounded == false)
+        {
+            rb.mass = rb.mass + Time.deltaTime;
+            movement = Vector3.one;
+        }
 
         if (isFlingable == true && isGrounded == true && Input.GetKeyDown(KeyCode.LeftShift))
         {
+            chargeTime = Time.time;
+            isCharging = true;
+            rb.linearVelocity = Vector3.zero;
+            rb.mass = 100000000;
+
+        }
+        if (isFlingable == true && isGrounded == true && Input.GetKeyUp(KeyCode.LeftShift) && isCharging)
+        {
+            rb.mass = 6;
             flingState = true;
-            rb.AddForce(Player.transform.forward * flingForceForward);
-            rb.AddForce(Vector3.up * flingForceUp);
+            float chargeDuration = Time.time - chargeTime;
+            if (chargeDuration > 3)
+            {
+                chargeDuration = 3;
+            }
+            float chargeforceForward = flingForceForward * chargeDuration;
+
+            if (chargeforceForward > 9000)
+            {
+                chargeforceForward = 9000;
+            }
+
+            
+                rb.AddForce(Player.transform.forward * chargeforceForward);
+                rb.AddForce(Vector3.up * flingForceUp);
+                isCharging = false;
+            
 
         }
         else if (isFlingable == false && isGrounded == true && Input.GetKeyDown(KeyCode.LeftShift))
@@ -185,12 +217,10 @@ public class PlayerMovement : MonoBehaviour
             movement += right * movementSpeed;
         }
 
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
-        {
-            movement += (forward + right) / movementSpeed;
-        }
+        
+            rb.AddForce(movement);
 
-        rb.AddForce(movement);
+
 
         
 
