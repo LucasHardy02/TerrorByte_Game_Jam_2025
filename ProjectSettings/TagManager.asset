@@ -8,6 +8,8 @@ TagManager:
   - Bedrock
   - Key
   - Door
+  - Water
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

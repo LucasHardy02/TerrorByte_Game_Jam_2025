@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    
     void Update()
     {
         //Fling
@@ -121,13 +122,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        rb.linearVelocity = Vector3.zero;
+    //        rb.angularVelocity = Vector3.zero;
+    //    }
         
 
         
@@ -135,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
        
 
 
-    }
+    //}
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Water"))
@@ -147,8 +148,12 @@ public class PlayerMovement : MonoBehaviour
             healthScript.Heal(1);
         }
     }
+
+    
     private void FixedUpdate()
     {
+
+
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
 
@@ -180,12 +185,12 @@ public class PlayerMovement : MonoBehaviour
             movement += right * movementSpeed;
         }
 
-        if (movement != Vector3.zero)
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
         {
-            rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
+            movement += (forward + right) / movementSpeed;
         }
 
-        rb.velocity = movement + new Vector3(0, rb.velocity.y, 0);
+        rb.AddForce(movement);
 
         
 
