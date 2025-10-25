@@ -6,6 +6,8 @@ public class Key : MonoBehaviour
     public Animator doorAnim;
     static bool hasKey = false;
 
+
+
     private void Start()
     {
         doorAnim = door.GetComponent<Animator>();
@@ -26,4 +28,5 @@ public class Key : MonoBehaviour
             doorAnim.enabled = true;
         }
     }
+    
 }

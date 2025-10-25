@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     static bool isGrounded = true;
     public Vector3 movement;
     public Transform cameraTransform;
+    public Health healthScript;
 
     private bool flingState = false;
     private bool isFlingable = true;
@@ -25,6 +26,10 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        if (healthScript == null)
+        {
+            healthScript = FindObjectOfType<Health>();
+        }
 
     }
 
@@ -63,38 +68,9 @@ public class PlayerMovement : MonoBehaviour
 
             }
         }
-        Vector3 forward = cameraTransform.forward;
-        Vector3 right = cameraTransform.right;
+        
 
-        forward.y = 0;
-        right.y = 0;
-        forward.Normalize();
-        right.Normalize();
-
-        movement = Vector3.zero;
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            movement += forward * movementSpeed; 
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            movement -= right * movementSpeed;
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            movement -= forward * movementSpeed;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            movement += right * movementSpeed;
-        }
-
-        rb.transform.position += movement * 5 * Time.deltaTime;
-
+       
         Vector3 cameraForward = cameraTransform.forward;
         cameraForward.y = 0; // keep only horizontal direction
         cameraForward.Normalize();
@@ -108,19 +84,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        foreach (ContactPoint contact in collision.contacts)
         {
-            isGrounded = true;
-            isFlingable = true;
-            hasJumped = false;
-        }
-        if (collision.gameObject.CompareTag("Bedrock"))
-        {
-            isGrounded = true;
-            isFlingable = false;
-            hasJumped = false;
+            if (Vector3.Angle(contact.normal, Vector3.up) < 45f) 
+            {
+                if (collision.gameObject.CompareTag("Ground"))
+                {
+                    isGrounded = true;
+                    isFlingable = true;
+                    hasJumped = false;
+                }
+                else if (collision.gameObject.CompareTag("Bedrock"))
+                {
+                    isGrounded = true;
+                    isFlingable = false;
+                    hasJumped = false;
+                }
+
+                return;
+            }
         }
 
+        // If no upward-facing contact points are found, treat as in-air
+        isGrounded = false;
     }
 
     private void OnCollisionExit(Collision collision)
@@ -142,5 +128,66 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
+        
+
+        
+
+       
+
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Water"))
+        {
+            healthScript.TakeDamage(1);
+        }
+        if (other.gameObject.CompareTag("Checkpoint"))
+        {
+            healthScript.Heal(1);
+        }
+    }
+    private void FixedUpdate()
+    {
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
+
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
+
+        movement = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            movement += forward * movementSpeed;
+
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            movement -= right * movementSpeed;
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            movement -= forward * movementSpeed;
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            movement += right * movementSpeed;
+        }
+
+        if (movement != Vector3.zero)
+        {
+            rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
+        }
+
+        rb.velocity = movement + new Vector3(0, rb.velocity.y, 0);
+
+        
+
     }
 }

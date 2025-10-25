@@ -46,8 +46,32 @@ public class Health : MonoBehaviour
         }
     }
 
-    void ChangeHealth(int amount)
+    private void OnTriggerEnter(Collider other)
     {
-        curHealth = Mathf.Clamp(curHealth + amount, 0, maxHealth);
+        if (other.CompareTag("Water"))
+        {
+            curHealth = curHealth - 1;
+        }
+        if (other.CompareTag("Checkpoint"))
+        {
+            curHealth = curHealth + 3;
+        }
+    }
+
+    public void TakeDamage(int amount)
+    {
+        curHealth -= amount;
+        curHealth = Mathf.Clamp(curHealth, 0, maxHealth);
+        UpdateHearts();
+    }
+
+    public void Heal(int amount)
+    {
+        curHealth += amount;
+        curHealth = Mathf.Clamp(curHealth, 0, maxHealth);
+        UpdateHearts();
     }
 }
+
+
+
