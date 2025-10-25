@@ -11579,7 +11579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 0}
   doorAnim: {fileID: 0}
-  keySprite: {fileID: 0}
+  keySprite: {fileID: 640644439}
 --- !u!114 &463510720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16437,6 +16437,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58de7e70e5f1dae409a5c251bd540a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &668246257
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668246252}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.719606, y: 0.95105654, z: 2.671534}
+  m_Center: {x: 1.4552944, y: -0.000000029802322, z: -6.7762636e-21}
 --- !u!1001 &669133318
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33763,6 +33784,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: KEY
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5cee76bc9f285a84193b541bb0731143, type: 3}
+      propertyPath: m_TagString
+      value: Key
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33770,6 +33795,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5cee76bc9f285a84193b541bb0731143, type: 3}
       insertIndex: -1
       addedObject: {fileID: 668246253}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5cee76bc9f285a84193b541bb0731143, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 668246257}
   m_SourcePrefab: {fileID: 100100000, guid: 5cee76bc9f285a84193b541bb0731143, type: 3}
 --- !u!1 &1403300518 stripped
 GameObject:
