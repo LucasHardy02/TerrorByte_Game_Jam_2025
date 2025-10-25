@@ -167,6 +167,7 @@ public class PlayerMovement : MonoBehaviour
             
 
         }
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -235,13 +236,15 @@ public class PlayerMovement : MonoBehaviour
         {
             movement += right * movementSpeed;
         }
+
         if(isClimbing == true)
         {
             movement += new Vector3(0, 1, 0) * movementSpeed;
             Debug.Log("You are trying to climb.");
         }
+       
 
-        
+
             rb.AddForce(movement);
 
 
