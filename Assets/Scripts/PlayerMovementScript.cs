@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private float coyTimeCount;
     private bool hasJumped = false;
     public int movementSpeed;
+    private bool isClimbing;
 
 
 
@@ -140,6 +141,9 @@ public class PlayerMovement : MonoBehaviour
 
         // If no upward-facing contact points are found, treat as in-air
         isGrounded = false;
+
+        
+
     }
 
     private void OnCollisionExit(Collision collision)
@@ -154,6 +158,21 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Ladder") && Input.GetKey(KeyCode.W))
+        {
+            isClimbing = true;
+            
+
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        isClimbing = false;
+    }
     //private void OnCollisionEnter(Collision collision)
     //{
     //    if (collision.gameObject.CompareTag("Ground"))
@@ -161,11 +180,11 @@ public class PlayerMovement : MonoBehaviour
     //        rb.linearVelocity = Vector3.zero;
     //        rb.angularVelocity = Vector3.zero;
     //    }
-        
 
-        
 
-       
+
+
+
 
 
     //}
@@ -215,6 +234,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             movement += right * movementSpeed;
+        }
+        if(isClimbing == true)
+        {
+            movement += new Vector3(0, 1, 0) * movementSpeed;
+            Debug.Log("You are trying to climb.");
         }
 
         
