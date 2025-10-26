@@ -17,4 +17,9 @@ public class EndingScreenTally : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void OnProceedButton()
+    {
+        SceneManager.LoadScene(2);
+    }
 }
