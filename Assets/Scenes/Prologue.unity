@@ -2746,7 +2746,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 904969903}
         m_TargetAssemblyTypeName: EndingScreenTally, Assembly-CSharp
-        m_MethodName: OnMenuButton
+        m_MethodName: OnProceedButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8478,7 +8478,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 904969903}
         m_TargetAssemblyTypeName: EndingScreenTally, Assembly-CSharp
-        m_MethodName: OnMenuButton
+        m_MethodName: OnProceedButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
