@@ -7,7 +7,7 @@ public class Animations : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerAnim = playerAnim.GetComponent<Animator>();
+        playerAnim = GetComponent<Animator>();
 
         playerAnim.Play("Idle");
     }
@@ -15,15 +15,15 @@ public class Animations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
         {
             playerAnim.Play("Walk");
         }
-        else if (Input.GetKey(KeyCode.LeftShift))
+        else if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             playerAnim.Play("Fling");
         }
-        else if (Input.GetKey(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.Space))
         {
             playerAnim.Play("Jump");
         }
