@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     public GameObject gameOver;
+    public GameObject player;
 
     public int maxHealth = 3;
     public int curHealth;
@@ -30,6 +31,7 @@ public class Health : MonoBehaviour
         if (curHealth == 0)
         {
             gameOver.SetActive(true);
+            player.SetActive(false);
         }
 
         UpdateHearts();
