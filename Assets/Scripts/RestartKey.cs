@@ -10,7 +10,7 @@ public class RestartKey : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(1);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private bool hasJumped = false;
     public int movementSpeed;
     private bool isClimbing;
+    private IEnumerator coroutine;
 
 
 
@@ -34,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
         {
             healthScript = FindObjectOfType<Health>();
         }
-
+        
     }
 
 
@@ -80,7 +82,15 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (isFlingable == false && isGrounded == true && Input.GetKeyDown(KeyCode.LeftShift))
         {
+            StartCoroutine(WaitForFunction());
             failFling.SetActive(true);
+            
+            
+        }
+        IEnumerator WaitForFunction()
+        {
+            yield return new WaitForSeconds(3);
+            failFling.SetActive(false);
         }
 
         if (isGrounded)
