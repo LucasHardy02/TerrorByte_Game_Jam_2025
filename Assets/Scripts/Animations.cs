@@ -3,6 +3,7 @@ using UnityEngine;
 public class Animations : MonoBehaviour
 {
     public Animator playerAnim;
+    public GameObject player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

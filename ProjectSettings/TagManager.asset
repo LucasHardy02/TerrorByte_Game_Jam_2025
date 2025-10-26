@@ -12,6 +12,7 @@ TagManager:
   - Checkpoint
   - Ladder
   - Button
+  - Enemy
   layers:
   - Default
   - TransparentFX
